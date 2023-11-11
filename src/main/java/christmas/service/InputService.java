@@ -10,22 +10,21 @@ public class InputService {
 
     public InputService(InputView view) {
         this.inputView = view;
-        InputVisitDay();
-        InputMenu();
     }
 
-    public void InputVisitDay() {
+    public UserVisitDay inputVisitDay() {
         String day = inputView.inputVisitDay();
         //TODO: 검증 로직 추가 필요
 
-        UserVisitDay userVisitDay = new UserVisitDay(Integer.parseInt(day));
+        return new UserVisitDay(Integer.parseInt(day));
     }
 
-    public void InputMenu(){
+    public UserOrderInfo inputMenu(){
         String menuInfo = inputView.inputMenuInfo();
         //TODO: 검증 로직 추가 필요
 
-        UserOrderInfo userOrderInfo = new UserOrderInfo(menuInfo);
+        return new UserOrderInfo(menuInfo);
     }
+
 
 }
