@@ -1,7 +1,8 @@
-package christmas.domain;
+package christmas.domain.User;
 
 public class UserVisitDay {
     private final int visitDay;
+
 
     public UserVisitDay(int visitDay) {
         this.visitDay = visitDay;

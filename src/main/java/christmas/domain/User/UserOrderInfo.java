@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -20,8 +20,9 @@ InputView 출력
 OutputView 출력
 
 ### 서비스
-- InputVisitDay(입력 -> 검증 -> 저장)
-- InputMenu(입력 -> 검증(beforeDiscountCheck, 공통예외) -> 저장)
+- InputService(InputVisitDay() -> InputMenu()
+  - InputVisitDay(입력 -> 검증 -> 저장)
+  - InputMenu(입력 -> 검증(beforeDiscountCheck, 공통예외) -> 저장)
 - DiscountDayCheck(입력 날짜 가져와서 다음을 비교 -> 디데이 할인 체크, 평일/주말 할인 여부 체크, 특별할인 여부 체크, 각 항목을 체크해서 그 금액을
   사용자의 입력 금액에서 뺀만큼을 할인 후 예상 결제금액에, 그리고 혜택 금액만큼을 총혜택 금액에 저장한다, 또한 체크할 때마다 그 혜택 내역을 저장한다).
 - benefitslListCheck(증정 메뉴를 줄 수 있느지 여부를 판단한다. 줄 수 있으면 개수를 해당 도메인에 저장한다. Map으로 저장, 각 혜택 내역 이름을 키로, 그리고 할인 금액을 값으로 한다
@@ -32,7 +33,7 @@ OutputView 출력
 - resultPrint (출력 형식에 맞춰서 출력하며 정보는 위 서비스를 통해 저장된 값들을 가져와서 출력한다)
 
 ### 유틸
-beforeDiscountCheck(가격과 개수를 가져와서 -> 총 구입 개수 -> 검증 -> 할인 전 총 주문 금액 -> 검증 -> 저장)
+- beforeDiscountCheck(가격과 개수를 가져와서 -> 총 구입 개수 -> 검증 -> 할인 전 총 주문 금액 -> 검증 -> 저장)
 
 
 ### 검증: 서비스 로직에서 검증 클래스로 입력 데이터 확인
