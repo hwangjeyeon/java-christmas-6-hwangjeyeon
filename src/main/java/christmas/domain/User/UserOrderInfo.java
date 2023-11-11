@@ -22,6 +22,12 @@ public class UserOrderInfo {
 
     }
 
+    public int calculateOrderCounts(){
+        return counts.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     public List<String> getMenu() {
         return menu;
     }
