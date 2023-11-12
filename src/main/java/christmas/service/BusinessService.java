@@ -12,11 +12,12 @@ public class BusinessService {
     }
 
     public void BusinessServiceProgress(){
-        OrderInfoSaveUtil();
+        orderInfoSaveUtil();
     }
 
-    public void OrderInfoSaveUtil(){
+    public void orderInfoSaveUtil(){
         OrderInfoSave orderInfoSave = new OrderInfoSave(domainEntityManager);
+        orderInfoSave.calculateOrderAmount();
     }
 
 }
