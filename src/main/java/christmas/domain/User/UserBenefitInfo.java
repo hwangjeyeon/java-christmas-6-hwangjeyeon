@@ -29,4 +29,20 @@ public class UserBenefitInfo {
     public List<Integer> getBenefitsAmounts() {
         return benefitsAmounts;
     }
+
+    public void setTotalBenefitsAmounts(int totalBenefitsAmounts) {
+        this.totalBenefitsAmounts = totalBenefitsAmounts;
+    }
+
+    public void setAfterDiscountAmounts(int afterDiscountAmounts) {
+        this.afterDiscountAmounts = afterDiscountAmounts;
+    }
+
+    public int getTotalBenefitsAmounts() {
+        return totalBenefitsAmounts;
+    }
+
+    public int getAfterDiscountAmounts() {
+        return afterDiscountAmounts;
+    }
 }
