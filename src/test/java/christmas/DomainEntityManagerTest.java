@@ -6,7 +6,8 @@ import christmas.domain.User.UserBenefitInfo;
 import christmas.domain.User.UserOrderInfo;
 import christmas.domain.User.UserVisitDay;
 import christmas.service.BusinessService;
-import christmas.service.util.GiftCheckUtil;
+import christmas.service.util.DDayCheck;
+import christmas.service.util.GiftCheck;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +20,9 @@ class DomainEntityManagerTest {
     private UserVisitDay userVisitDay;
     private OrderInfo orderInfo;
     private GiftMenuInfo giftMenuInfo;
-    private GiftCheckUtil giftCheckUtil;
+    private GiftCheck giftCheck;
+    private UserBenefitInfo userBenefitInfo;
+    private DDayCheck dDayCheck;
 
     private int visitDay;
     private String orderInfos;
@@ -33,7 +36,9 @@ class DomainEntityManagerTest {
         businessService = new BusinessService(domainEntityManager);
         orderInfo = new OrderInfo();
         giftMenuInfo = new GiftMenuInfo();
-        giftCheckUtil = new GiftCheckUtil(domainEntityManager);
+        giftCheck = new GiftCheck(domainEntityManager);
+        userBenefitInfo = new UserBenefitInfo();
+        dDayCheck = new DDayCheck(domainEntityManager);
     }
 
     @DisplayName("도메인 엔티티 매니저가 방문일을 잘 저장하는가")
@@ -107,7 +112,37 @@ class DomainEntityManagerTest {
         Assertions.assertEquals(domainEntityManager.getGiftMenuInfo().getCounts(),0);
     }
 
+    @DisplayName("도메인 엔티티 매니저가 크리스마스 디데이 할인 정보를 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveDdayInfoTest1(){
+        //given
+
+        //when
+        businessService.dDayCheckUtil();
+
+        //then
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("크리스마스 디데이 할인"));
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(2400));
+    }
 
 
+    @DisplayName("도메인 엔티티 매니저가 크리스마스 디데이 할인 정보를 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveDdayInfoTest2(){
+        //given
+        visitDay = 26;
+        userVisitDay = new UserVisitDay(visitDay);
+        domainEntityManager = new DomainEntityManager(userVisitDay, userOrderInfo);
+        businessService = new BusinessService(domainEntityManager);
+        userBenefitInfo = new UserBenefitInfo();
+        dDayCheck = new DDayCheck(domainEntityManager);
+
+        //when
+        businessService.dDayCheckUtil();
+
+        //then
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("없음"));
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(0));
+    }
 
 }
