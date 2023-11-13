@@ -23,6 +23,7 @@ public class GiftCheck {
         if(giftCheck()){
             domainEntityManager.getGiftMenuInfo().setName(MenuInfo.CHAMPAGNE.getName());
             domainEntityManager.getGiftMenuInfo().setCounts(1);
+            domainEntityManager.getGiftMenuInfo().setGiftMenuPrice();
         }
 
         if(!giftCheck()){
