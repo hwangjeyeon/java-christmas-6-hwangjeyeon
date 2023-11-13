@@ -3,14 +3,14 @@ package christmas.service.util;
 import christmas.DomainEntityManager;
 import christmas.domain.menu.MenuInfo;
 
-public class GiftCheckUtil {
+public class GiftCheck {
     private final DomainEntityManager domainEntityManager;
 
-    public GiftCheckUtil(DomainEntityManager domainEntityManager) {
+    public GiftCheck(DomainEntityManager domainEntityManager) {
         this.domainEntityManager = domainEntityManager;
     }
 
-    public boolean GiftCheck(){
+    public boolean giftCheck(){
         if(domainEntityManager.getOrderInfo().getBeforeOrderAmount() >= 120000){
             return true;
         }
@@ -20,12 +20,12 @@ public class GiftCheckUtil {
 
 
     public void setGiftMenuInfo(){
-        if(GiftCheck()){
+        if(giftCheck()){
             domainEntityManager.getGiftMenuInfo().setName(MenuInfo.CHAMPAGNE.getName());
             domainEntityManager.getGiftMenuInfo().setCounts(1);
         }
 
-        if(!GiftCheck()){
+        if(!giftCheck()){
             domainEntityManager.getGiftMenuInfo().setName("없음");
             domainEntityManager.getGiftMenuInfo().setCounts(0);
         }
