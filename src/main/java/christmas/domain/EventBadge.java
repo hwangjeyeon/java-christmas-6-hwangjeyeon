@@ -2,12 +2,15 @@ package christmas.domain;
 
 public class EventBadge {
 
-    private final String eventBadge;
+    private String eventBadge;
 
-    public EventBadge(String eventBadge) {
-        this.eventBadge = eventBadge;
+    public EventBadge() {
+        this.eventBadge = "없음";
     }
 
+    public void setEventBadge(String eventBadge) {
+        this.eventBadge = eventBadge;
+    }
 
     public String getEventBadge() {
         return eventBadge;
