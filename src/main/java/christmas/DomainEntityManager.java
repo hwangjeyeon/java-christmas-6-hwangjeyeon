@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.domain.GiftMenuInfo;
 import christmas.domain.OrderInfo;
 import christmas.domain.User.UserOrderInfo;
 import christmas.domain.User.UserVisitDay;
@@ -14,12 +15,16 @@ public class DomainEntityManager {
     private final UserVisitDay userVisitDay;
     private final OrderInfo orderInfo;
     private final EnumMap<MenuInfo, Integer> orderPrice;
+    private final GiftMenuInfo giftMenuInfo;
+
+
 
     public DomainEntityManager(UserVisitDay userVisitDay, UserOrderInfo userOrderInfo) {
         this.userVisitDay = userVisitDay;
         this.userOrderInfo = userOrderInfo;
         this.orderInfo = new OrderInfo();
         this.orderPrice = new EnumMap<>(MenuInfo.class);
+        this.giftMenuInfo = new GiftMenuInfo();
     }
 
     public UserOrderInfo getUserOrderInfo() {
@@ -36,5 +41,9 @@ public class DomainEntityManager {
 
     public EnumMap<MenuInfo, Integer> getOrderPrice() {
         return orderPrice;
+    }
+
+    public GiftMenuInfo getGiftMenuInfo() {
+        return giftMenuInfo;
     }
 }
