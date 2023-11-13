@@ -4,6 +4,7 @@ import christmas.DomainEntityManager;
 import christmas.service.util.DDayCheck;
 import christmas.service.util.GiftCheck;
 import christmas.service.util.OrderInfoSave;
+import christmas.service.util.WeekCategoryCheck;
 
 public class BusinessService {
 
@@ -15,8 +16,9 @@ public class BusinessService {
 
     public void BusinessServiceProgress(){
         orderInfoSaveUtil();
-        GiftCheckUtil();
+        giftCheckUtil();
         dDayCheckUtil();
+        weekCategoryCheckUtil();
     }
 
     public void orderInfoSaveUtil(){
@@ -24,7 +26,7 @@ public class BusinessService {
         orderInfoSave.calculateOrderAmount();
     }
 
-    public void GiftCheckUtil(){
+    public void giftCheckUtil(){
         GiftCheck giftCheck = new GiftCheck(domainEntityManager);
         giftCheck.setGiftMenuInfo();
     }
@@ -32,6 +34,11 @@ public class BusinessService {
     public void dDayCheckUtil(){
         DDayCheck dDayCheck = new DDayCheck(domainEntityManager);
         dDayCheck.dDayCheck();
+    }
+
+    public void weekCategoryCheckUtil(){
+        WeekCategoryCheck weekCategoryCheck = new WeekCategoryCheck(domainEntityManager);
+        weekCategoryCheck.weekCategoryCheck();
     }
 
 }
