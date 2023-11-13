@@ -122,7 +122,7 @@ class DomainEntityManagerTest {
 
         //then
         Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("크리스마스 디데이 할인"));
-        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(2));
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(2400));
     }
 
 
@@ -146,7 +146,7 @@ class DomainEntityManagerTest {
 
     @DisplayName("도메인 엔티티 매니저가 평일 할인 정보를 잘 저장하는가")
     @Test
-    void domainEntityManagerSaveWeekdayDiscounts(){
+    void domainEntityManagerSaveWeekDayDiscounts(){
         //given
 
         //when
@@ -159,7 +159,7 @@ class DomainEntityManagerTest {
 
     @DisplayName("도메인 엔티티 매니저가 주말 할인 정보를 잘 저장하는가")
     @Test
-    void domainEntityManagerSaveWeekenddayDiscounts(){
+    void domainEntityManagerSaveWeekendDayDiscounts(){
         //given
         visitDay = 26;
         userVisitDay = new UserVisitDay(visitDay);
@@ -173,6 +173,133 @@ class DomainEntityManagerTest {
         Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("평일 할인"));
         Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(4046));
 
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 특별 할인을 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveStarDiscounts1(){
+        //given
+
+        //when
+        businessService.starCheckUtil();
+
+        //then
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("없음"));
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(0));
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 특별 할인을 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveStarDiscounts2(){
+        //given
+        visitDay = 25;
+        userVisitDay = new UserVisitDay(visitDay);
+        domainEntityManager = new DomainEntityManager(userVisitDay, userOrderInfo);
+        businessService = new BusinessService(domainEntityManager);
+        //when
+        businessService.starCheckUtil();
+
+        //then
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("특별 할인"));
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(1000));
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 증정 이벤트 내역을 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveGiftInfo(){
+        //given
+
+        //when
+        businessService.BusinessServiceProgress();
+
+        //then
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("증정 이벤트"));
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(25000));
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 총 혜택 금액을 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveTotalBenefitsAmounts(){
+        //given
+        visitDay = 3;
+        userVisitDay = new UserVisitDay(visitDay);
+        domainEntityManager = new DomainEntityManager(userVisitDay, userOrderInfo);
+        businessService = new BusinessService(domainEntityManager);
+
+        //when
+        businessService.BusinessServiceProgress();
+
+        //then
+        Assertions.assertEquals(domainEntityManager.getBenefitInfo().getTotalBenefitsAmounts(), 31246);
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 할인 후 예상 결제 금액을 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveAfterDiscountAmount(){
+        //given
+        visitDay = 3;
+        userVisitDay = new UserVisitDay(visitDay);
+        domainEntityManager = new DomainEntityManager(userVisitDay, userOrderInfo);
+        businessService = new BusinessService(domainEntityManager);
+
+
+        //when
+        businessService.BusinessServiceProgress();
+
+        //then
+        Assertions.assertEquals(domainEntityManager.getBenefitInfo().getAfterDiscountAmounts(), 135754);
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 12월 이벤트 배지를 잘 저장하는가")
+    @Test
+    void domainEntityMangerSaveEventBadge1(){
+        //given
+
+        //when
+        businessService.BusinessServiceProgress();
+
+        //then
+        Assertions.assertEquals(domainEntityManager.getEventBadge().getEventBadge(),"산타");
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 12월 이벤트 배지를 잘 저장하는가")
+    @Test
+    void domainEntityMangerSaveEventBadge2(){
+        //given
+        domainEntityManager.getBenefitInfo().setTotalBenefitsAmounts(10000);
+
+        //when
+        businessService.eventBadgeCheckUtil();
+
+        //then
+        Assertions.assertEquals(domainEntityManager.getEventBadge().getEventBadge(),"트리");
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 12월 이벤트 배지를 잘 저장하는가")
+    @Test
+    void domainEntityMangerSaveEventBadge3(){
+        //given
+        domainEntityManager.getBenefitInfo().setTotalBenefitsAmounts(5000);
+
+        //when
+        businessService.eventBadgeCheckUtil();
+
+        //then
+        Assertions.assertEquals(domainEntityManager.getEventBadge().getEventBadge(),"별");
+    }
+
+
+    @DisplayName("도메인 엔티티 매니저가 12월 이벤트 배지를 잘 저장하는가")
+    @Test
+    void domainEntityMangerSaveEventBadge4(){
+        //given
+        domainEntityManager.getBenefitInfo().setTotalBenefitsAmounts(4999);
+
+        //when
+        businessService.eventBadgeCheckUtil();
+
+        //then
+        Assertions.assertEquals(domainEntityManager.getEventBadge().getEventBadge(),"없음");
     }
 
 }
