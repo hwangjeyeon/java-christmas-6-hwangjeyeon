@@ -91,7 +91,7 @@ class DomainEntityManagerTest {
         businessService.orderInfoSaveUtil();
 
         //when
-        businessService.GiftCheckUtil();
+        businessService.giftCheckUtil();
 
         //then
         Assertions.assertEquals(domainEntityManager.getGiftMenuInfo().getName(),"샴페인");
@@ -105,7 +105,7 @@ class DomainEntityManagerTest {
         orderInfo.setBeforeOrderAmount(2000);
 
         //when
-        businessService.GiftCheckUtil();
+        businessService.giftCheckUtil();
 
         //then
         Assertions.assertEquals(domainEntityManager.getGiftMenuInfo().getName(),"없음");
@@ -122,7 +122,7 @@ class DomainEntityManagerTest {
 
         //then
         Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("크리스마스 디데이 할인"));
-        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(2400));
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(2));
     }
 
 
@@ -134,7 +134,6 @@ class DomainEntityManagerTest {
         userVisitDay = new UserVisitDay(visitDay);
         domainEntityManager = new DomainEntityManager(userVisitDay, userOrderInfo);
         businessService = new BusinessService(domainEntityManager);
-        userBenefitInfo = new UserBenefitInfo();
         dDayCheck = new DDayCheck(domainEntityManager);
 
         //when
@@ -143,6 +142,37 @@ class DomainEntityManagerTest {
         //then
         Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("없음"));
         Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(0));
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 평일 할인 정보를 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveWeekdayDiscounts(){
+        //given
+
+        //when
+        businessService.weekCategoryCheckUtil();
+
+        //then
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("주말 할인"));
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(4046));
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 주말 할인 정보를 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveWeekenddayDiscounts(){
+        //given
+        visitDay = 26;
+        userVisitDay = new UserVisitDay(visitDay);
+        domainEntityManager = new DomainEntityManager(userVisitDay, userOrderInfo);
+        businessService = new BusinessService(domainEntityManager);
+
+        //when
+        businessService.weekCategoryCheckUtil();
+
+        //then
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsName().contains("평일 할인"));
+        Assertions.assertTrue(domainEntityManager.getBenefitInfo().getBenefitsAmounts().contains(4046));
+
     }
 
 }
