@@ -1,9 +1,12 @@
 package christmas;
 
+import christmas.domain.GiftMenuInfo;
 import christmas.domain.OrderInfo;
+import christmas.domain.User.UserBenefitInfo;
 import christmas.domain.User.UserOrderInfo;
 import christmas.domain.User.UserVisitDay;
 import christmas.service.BusinessService;
+import christmas.service.util.GiftCheckUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,11 +15,14 @@ import org.junit.jupiter.api.Test;
 class DomainEntityManagerTest {
     private DomainEntityManager domainEntityManager;
     private BusinessService businessService;
-    UserOrderInfo userOrderInfo;
-    UserVisitDay userVisitDay;
-    OrderInfo orderInfo;
-    int visitDay;
-    String orderInfos;
+    private UserOrderInfo userOrderInfo;
+    private UserVisitDay userVisitDay;
+    private OrderInfo orderInfo;
+    private GiftMenuInfo giftMenuInfo;
+    private GiftCheckUtil giftCheckUtil;
+
+    private int visitDay;
+    private String orderInfos;
     @BeforeEach
     void setup(){
         visitDay = 15;
@@ -26,6 +32,8 @@ class DomainEntityManagerTest {
         domainEntityManager = new DomainEntityManager(userVisitDay, userOrderInfo);
         businessService = new BusinessService(domainEntityManager);
         orderInfo = new OrderInfo();
+        giftMenuInfo = new GiftMenuInfo();
+        giftCheckUtil = new GiftCheckUtil(domainEntityManager);
     }
 
     @DisplayName("도메인 엔티티 매니저가 방문일을 잘 저장하는가")
@@ -69,6 +77,34 @@ class DomainEntityManagerTest {
         //then
         Assertions.assertEquals(domainEntityManager.getOrderInfo().getBeforeOrderAmount()
                 , orderInfo.getBeforeOrderAmount());
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 할인 전 총 주문금액이 12만원 이상일때, 증정 메뉴 정보를 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveGiftMenuTest1(){
+        //given
+        businessService.orderInfoSaveUtil();
+
+        //when
+        businessService.GiftCheckUtil();
+
+        //then
+        Assertions.assertEquals(domainEntityManager.getGiftMenuInfo().getName(),"샴페인");
+        Assertions.assertEquals(domainEntityManager.getGiftMenuInfo().getCounts(),1);
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 할인 전 총 주문금액이 12만원을 이하일때, 증정 메뉴 정보를 잘 저장하는가")
+    @Test
+    void domainEntityManagerSaveGiftMenuTest2(){
+        //given
+        orderInfo.setBeforeOrderAmount(2000);
+
+        //when
+        businessService.GiftCheckUtil();
+
+        //then
+        Assertions.assertEquals(domainEntityManager.getGiftMenuInfo().getName(),"없음");
+        Assertions.assertEquals(domainEntityManager.getGiftMenuInfo().getCounts(),0);
     }
 
 
