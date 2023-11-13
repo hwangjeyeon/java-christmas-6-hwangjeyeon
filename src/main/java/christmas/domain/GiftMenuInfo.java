@@ -2,14 +2,16 @@ package christmas.domain;
 
 public class GiftMenuInfo {
 
-    private final String name;
-    private final int counts;
+    private String name;
+    private int counts;
 
-    public GiftMenuInfo(String name, int counts) {
+    public void setName(String name) {
         this.name = name;
-        this.counts = counts;
     }
 
+    public void setCounts(int counts) {
+        this.counts = counts;
+    }
 
     public String getName() {
         return name;
