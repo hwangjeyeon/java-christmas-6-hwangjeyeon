@@ -2,7 +2,6 @@ package christmas.domain.menu;
 
 
 import java.util.EnumSet;
-import java.util.Optional;
 
 public enum MenuInfo {
     MUSHROOM_CREAM_SOUP("양송이수프", 6000,Category.APPETIZER),
@@ -35,6 +34,14 @@ public enum MenuInfo {
                 .findFirst()
                 .map(MenuInfo::getPrice)
                 .orElse(0);
+    }
+
+    public static Category getCategoryByName(String name){
+        return EnumSet.allOf(MenuInfo.class).stream()
+                .filter(menuInfo -> menuInfo.name.equals(name))
+                .findFirst()
+                .map(MenuInfo::getCategory)
+                .orElse(null);
     }
 
     public String getName() {

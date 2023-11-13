@@ -1,5 +1,7 @@
 package christmas.domain.calendar;
 
+import java.util.EnumSet;
+
 public enum December {
     ONE(1,"주말",false),
     TWO(2,"주말",false),
@@ -42,6 +44,23 @@ public enum December {
         this.day = day;
         this.dayOfWeek = dayOfWeek;
         this.star = star;
+    }
+
+    public static String getDayOfWeekByDay(int day){
+        return EnumSet.allOf(December.class).stream()
+                .filter(December -> December.day==day)
+                .findFirst()
+                .map(December::getDayOfWeek)
+                .orElse("없음");
+    }
+
+
+    public static boolean getStarByDay(int day){
+        return Boolean.TRUE.equals(EnumSet.allOf(December.class).stream()
+                .filter(December -> December.day == day)
+                .findFirst()
+                .map(December::isStar)
+                .orElse(false));
     }
 
 
