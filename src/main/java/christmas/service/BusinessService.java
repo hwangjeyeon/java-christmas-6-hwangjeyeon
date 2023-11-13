@@ -1,7 +1,8 @@
 package christmas.service;
 
 import christmas.DomainEntityManager;
-import christmas.service.util.GiftCheckUtil;
+import christmas.service.util.DDayCheck;
+import christmas.service.util.GiftCheck;
 import christmas.service.util.OrderInfoSave;
 
 public class BusinessService {
@@ -15,6 +16,7 @@ public class BusinessService {
     public void BusinessServiceProgress(){
         orderInfoSaveUtil();
         GiftCheckUtil();
+        dDayCheckUtil();
     }
 
     public void orderInfoSaveUtil(){
@@ -23,8 +25,13 @@ public class BusinessService {
     }
 
     public void GiftCheckUtil(){
-        GiftCheckUtil giftCheckUtil = new GiftCheckUtil(domainEntityManager);
-        giftCheckUtil.setGiftMenuInfo();
+        GiftCheck giftCheck = new GiftCheck(domainEntityManager);
+        giftCheck.setGiftMenuInfo();
+    }
+
+    public void dDayCheckUtil(){
+        DDayCheck dDayCheck = new DDayCheck(domainEntityManager);
+        dDayCheck.dDayCheck();
     }
 
 }
