@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.domain.EventBadge;
 import christmas.domain.GiftMenuInfo;
 import christmas.domain.OrderInfo;
 import christmas.domain.User.UserBenefitInfo;
@@ -21,6 +22,7 @@ public class DomainEntityManager {
     private final GiftMenuInfo giftMenuInfo;
     private final EnumMap<December, Integer> calender;
     private final UserBenefitInfo benefitInfo;
+    private final EventBadge eventBadge;
 
 
 
@@ -32,6 +34,7 @@ public class DomainEntityManager {
         this.giftMenuInfo = new GiftMenuInfo();
         this.calender = new EnumMap<>(December.class);
         this.benefitInfo = new UserBenefitInfo();
+        this.eventBadge = new EventBadge();
     }
 
     public UserOrderInfo getUserOrderInfo() {
@@ -60,5 +63,9 @@ public class DomainEntityManager {
 
     public UserBenefitInfo getBenefitInfo() {
         return benefitInfo;
+    }
+
+    public EventBadge getEventBadge() {
+        return eventBadge;
     }
 }

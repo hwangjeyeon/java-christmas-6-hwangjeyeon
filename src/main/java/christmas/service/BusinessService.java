@@ -1,10 +1,7 @@
 package christmas.service;
 
 import christmas.DomainEntityManager;
-import christmas.service.util.DDayCheck;
-import christmas.service.util.GiftCheck;
-import christmas.service.util.OrderInfoSave;
-import christmas.service.util.WeekCategoryCheck;
+import christmas.service.util.*;
 
 public class BusinessService {
 
@@ -18,7 +15,11 @@ public class BusinessService {
         orderInfoSaveUtil();
         giftCheckUtil();
         dDayCheckUtil();
+        starCheckUtil();
+        giftSaveUtil();
         weekCategoryCheckUtil();
+        calculateBenefitsUtil();
+        eventBadgeCheckUtil();
     }
 
     public void orderInfoSaveUtil(){
@@ -39,6 +40,27 @@ public class BusinessService {
     public void weekCategoryCheckUtil(){
         WeekCategoryCheck weekCategoryCheck = new WeekCategoryCheck(domainEntityManager);
         weekCategoryCheck.weekCategoryCheck();
+    }
+
+    public void starCheckUtil(){
+        StarCheck starCheck = new StarCheck(domainEntityManager);
+        starCheck.starCheck();
+    }
+
+    public void giftSaveUtil(){
+        GiftSave giftSave = new GiftSave(domainEntityManager);
+        giftSave.giftSave();
+    }
+
+    public void calculateBenefitsUtil(){
+        CalculateBenefits calculateBenefits = new CalculateBenefits(domainEntityManager);
+        calculateBenefits.calculateBenefits();
+        calculateBenefits.calculateAfterDiscounts();
+    }
+
+    public void eventBadgeCheckUtil(){
+        EventBadgeCheck eventBadgeCheck = new EventBadgeCheck(domainEntityManager);
+        eventBadgeCheck.eventBadgeCheck();
     }
 
 }
