@@ -1,8 +1,11 @@
 package christmas.service;
 
 import christmas.DomainEntityManager;
+import christmas.domain.menu.MenuInfo;
 
 import java.text.DecimalFormat;
+import java.util.EnumSet;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class OutputService {
@@ -12,14 +15,14 @@ public class OutputService {
     public OutputService(DomainEntityManager domainEntityManager) {
         this.domainEntityManager = domainEntityManager;
     }
-
-    //TODO: 모델 변수 선언, 모델의 숫자값들을 전부 문자로 바꾸기, 1000단위당 "," 구분자 넣기
     public String makeStringEventList(){
         String sb = "12월 " +
                 domainEntityManager.getUserVisitDay().getVisitDay() +
                 "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n";
         return sb;
     }
+
+
 
     public String makeOrderMenuList(){
         StringBuilder sb = new StringBuilder();

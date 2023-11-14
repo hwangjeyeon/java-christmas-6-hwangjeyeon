@@ -2,28 +2,52 @@ package christmas.service;
 
 import christmas.domain.User.UserOrderInfo;
 import christmas.domain.User.UserVisitDay;
+import christmas.domain.menu.MenuInfo;
+import christmas.validate.InputMenuValidate;
+import christmas.validate.InputVisitDayValidate;
 import christmas.view.InputView;
+
+import java.util.EnumSet;
+import java.util.stream.Collectors;
 
 public class InputService {
 
     private final InputView inputView;
+
 
     public InputService(InputView view) {
         this.inputView = view;
     }
 
     public UserVisitDay inputVisitDay() {
-        String day = inputView.inputVisitDay();
-        //TODO: 검증 로직 추가 필요
-
-        return new UserVisitDay(Integer.parseInt(day));
+        try {
+            InputVisitDayValidate inputVisitDayValidate
+                    = new InputVisitDayValidate(inputView.inputVisitDay());
+            String day = inputVisitDayValidate.validate();
+            basicInfoService();
+            return new UserVisitDay(Integer.parseInt(day));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputVisitDay();
+        }
     }
 
-    public UserOrderInfo inputMenu(){
-        String menuInfo = inputView.inputMenuInfo();
-        //TODO: 검증 로직 추가 필요
+    private void basicInfoService() {
+        inputView.basicInfoMenuList();
+        inputView.basicClientCautionInfo();
+    }
 
-        return new UserOrderInfo(menuInfo);
+
+    public UserOrderInfo inputMenu(){
+        try{
+            InputMenuValidate inputMenuValidate
+                    = new InputMenuValidate(inputView.inputMenuInfo());
+            String menu = inputMenuValidate.validate();
+            return new UserOrderInfo(menu);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return inputMenu();
+        }
     }
 
 
