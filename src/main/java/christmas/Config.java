@@ -3,11 +3,12 @@ package christmas;
 import christmas.service.BusinessService;
 import christmas.service.InputService;
 import christmas.service.OutputService;
+import christmas.service.BasicService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class Config {
-
+    BasicService basicService;
     InputView inputView;
     InputService inputService;
     DomainEntityManager domainEntityManager;
@@ -16,7 +17,8 @@ public class Config {
     OutputService outputService;
 
     public Config() {
-        this.inputView = new InputView();
+        this.basicService = new BasicService();
+        this.inputView = new InputView(basicService);
         this.inputService = new InputService(inputView);
         this.domainEntityManager =
                 new DomainEntityManager(inputService.inputVisitDay(), inputService.inputMenu());
