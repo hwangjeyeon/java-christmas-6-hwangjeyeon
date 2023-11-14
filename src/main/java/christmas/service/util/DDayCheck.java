@@ -10,7 +10,8 @@ public class DDayCheck {
     }
 
     public void dDayCheck(){
-        if(domainEntityManager.getUserVisitDay().getVisitDay() <= 25 ){
+        if(domainEntityManager.getUserVisitDay().getVisitDay() <= 25
+            && domainEntityManager.getOrderInfo().getBeforeOrderAmount() >= 10000){
             int discounts = 1000 + (domainEntityManager.getUserVisitDay().getVisitDay() - 1) * 100;
             domainEntityManager.getBenefitInfo().addBenefitsListInfo("크리스마스 디데이 할인", discounts);
         }

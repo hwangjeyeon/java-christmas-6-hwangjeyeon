@@ -11,7 +11,8 @@ public class StarCheck {
     }
     
     public void starCheck(){
-        if(December.getStarByDay(domainEntityManager.getUserVisitDay().getVisitDay())){
+        if(December.getStarByDay(domainEntityManager.getUserVisitDay().getVisitDay())
+                && domainEntityManager.getOrderInfo().getBeforeOrderAmount() >= 10000){
           domainEntityManager.getBenefitInfo().addBenefitsListInfo("특별 할인", 1000);  
         }
         

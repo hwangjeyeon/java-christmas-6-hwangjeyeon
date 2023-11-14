@@ -20,12 +20,17 @@ public class WeekCategoryCheck {
         List<String> orderMenu = domainEntityManager.getUserOrderInfo().getMenu();
         List<Integer> orderCounts = domainEntityManager.getUserOrderInfo().getCounts();
         String weekCategory = December.getDayOfWeekByDay(domainEntityManager.getUserVisitDay().getVisitDay());
+
         if(weekCategory.equals("평일")){
             menuCategoryInWeekDayCheck(orderMenu, orderCounts);
         }
 
         if(weekCategory.equals("주말")){
             menuCategoryInWeekendDayCheck(orderMenu, orderCounts);
+        }
+
+        if(domainEntityManager.getOrderInfo().getBeforeOrderAmount() < 10000){
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", 0);
         }
     }
 
@@ -41,7 +46,7 @@ public class WeekCategoryCheck {
                     .mapToInt(Integer::intValue)
                     .sum();
         if(discounts == 0){
-            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", discounts*2023);
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", 0);
         }
 
         if(discounts != 0){
@@ -61,7 +66,7 @@ public class WeekCategoryCheck {
                 .mapToInt(Integer::intValue)
                 .sum();
         if(discounts == 0){
-            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", discounts*2023);
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", 0);
         }
 
         if(discounts != 0){
