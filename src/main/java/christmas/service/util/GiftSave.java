@@ -10,8 +10,16 @@ public class GiftSave {
     }
 
     public void giftSave(){
-        domainEntityManager.getBenefitInfo().addBenefitsListInfo(
-                "증정 이벤트",domainEntityManager.getGiftMenuInfo().getPrice());
+        if(domainEntityManager.getGiftMenuInfo().getPrice() == 0){
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo(
+                    "없음",domainEntityManager.getGiftMenuInfo().getPrice());
+        }
+
+        if(domainEntityManager.getGiftMenuInfo().getPrice() != 0){
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo(
+                    "증정 이벤트",domainEntityManager.getGiftMenuInfo().getPrice());
+        }
+
     }
 
 }

@@ -40,7 +40,14 @@ public class WeekCategoryCheck {
                     .mapToObj(orderCounts::get)
                     .mapToInt(Integer::intValue)
                     .sum();
-        domainEntityManager.getBenefitInfo().addBenefitsListInfo("평일 할인", discounts*2023);
+        if(discounts == 0){
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", discounts*2023);
+        }
+
+        if(discounts != 0){
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("평일 할인", discounts*2023);
+        }
+
     }
 
 
@@ -53,7 +60,14 @@ public class WeekCategoryCheck {
                 .mapToObj(orderCounts::get)
                 .mapToInt(Integer::intValue)
                 .sum();
-        domainEntityManager.getBenefitInfo().addBenefitsListInfo("주말 할인", discounts*2023);
+        if(discounts == 0){
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", discounts*2023);
+        }
+
+        if(discounts != 0){
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("주말 할인", discounts*2023);
+        }
+
     }
 
 
