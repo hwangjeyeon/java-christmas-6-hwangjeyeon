@@ -15,9 +15,9 @@ public class BusinessService {
         orderInfoSaveUtil();
         giftCheckUtil();
         dDayCheckUtil();
+        weekCategoryCheckUtil();
         starCheckUtil();
         giftSaveUtil();
-        weekCategoryCheckUtil();
         calculateBenefitsUtil();
         eventBadgeCheckUtil();
     }
