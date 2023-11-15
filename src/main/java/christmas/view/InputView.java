@@ -19,8 +19,7 @@ public class InputView {
 
     public String inputVisitDay(){
         System.out.println(INPUT_START_MENT + INPUT_VISIT_DAY);
-        String input = readLine();
-        return input;
+        return readLine();
     }
 
     public void basicInfoMenuList(){
@@ -33,8 +32,7 @@ public class InputView {
 
     public String inputMenuInfo(){
         System.out.println(INPUT_MENU_INFO);
-        String input = readLine();
-        return input;
+        return readLine();
     }
 
 

@@ -19,7 +19,7 @@ public class InputVisitDayValidate {
         try{
             Integer.parseInt(day);
         }catch (NumberFormatException e) {
-            throw new IllegalArgumentException(PREFIX + "정수형 숫자로 입력하세요. " + SUFFIX);
+            throw new IllegalArgumentException(PREFIX + "유효하지 않은 날짜입니다. " + SUFFIX);
         }
     }
 

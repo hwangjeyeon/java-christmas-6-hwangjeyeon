@@ -18,9 +18,7 @@ public class DomainEntityManager {
     private final UserOrderInfo userOrderInfo;
     private final UserVisitDay userVisitDay;
     private final OrderInfo orderInfo;
-    private final EnumMap<MenuInfo, Integer> orderPrice;
     private final GiftMenuInfo giftMenuInfo;
-    private final EnumMap<December, Integer> calender;
     private final UserBenefitInfo benefitInfo;
     private final EventBadge eventBadge;
 
@@ -30,9 +28,7 @@ public class DomainEntityManager {
         this.userVisitDay = userVisitDay;
         this.userOrderInfo = userOrderInfo;
         this.orderInfo = new OrderInfo();
-        this.orderPrice = new EnumMap<>(MenuInfo.class);
         this.giftMenuInfo = new GiftMenuInfo();
-        this.calender = new EnumMap<>(December.class);
         this.benefitInfo = new UserBenefitInfo();
         this.eventBadge = new EventBadge();
     }
@@ -49,16 +45,8 @@ public class DomainEntityManager {
         return orderInfo;
     }
 
-    public EnumMap<MenuInfo, Integer> getOrderPrice() {
-        return orderPrice;
-    }
-
     public GiftMenuInfo getGiftMenuInfo() {
         return giftMenuInfo;
-    }
-
-    public EnumMap<December, Integer> getCalender() {
-        return calender;
     }
 
     public UserBenefitInfo getBenefitInfo() {

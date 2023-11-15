@@ -2,7 +2,7 @@ package christmas;
 
 public class Application {
     public static void main(String[] args) {
-        Controller controller =  new Controller(new Config());
+        Controller controller =  new Controller();
         controller.controllerRun();
     }
 }
