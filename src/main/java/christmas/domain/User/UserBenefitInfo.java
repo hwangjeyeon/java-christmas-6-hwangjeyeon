@@ -5,8 +5,8 @@ import java.util.List;
 
 public class UserBenefitInfo {
 
-    private List<String> benefitsName;
-    private List<Integer> benefitsAmounts;
+    private final List<String> benefitsName;
+    private final List<Integer> benefitsAmounts;
 
     private int totalBenefitsAmounts;
     private int afterDiscountAmounts;

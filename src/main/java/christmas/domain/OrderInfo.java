@@ -3,10 +3,6 @@ package christmas.domain;
 public class OrderInfo {
     private int beforeOrderAmount;
 
-    public OrderInfo() {
-    }
-
-
     public int getBeforeOrderAmount() {
         return beforeOrderAmount;
     }

@@ -11,12 +11,12 @@ public class StarCheck {
     }
     
     public void starCheck(){
-        if(December.getStarByDay(domainEntityManager.getUserVisitDay().getVisitDay())
+        if(December.getStarByDay(domainEntityManager.getUserVisitDay().visitDay())
                 && domainEntityManager.getOrderInfo().getBeforeOrderAmount() >= 10000){
           domainEntityManager.getBenefitInfo().addBenefitsListInfo("특별 할인", 1000);  
         }
         
-        if(!December.getStarByDay(domainEntityManager.getUserVisitDay().getVisitDay())){
+        if(!December.getStarByDay(domainEntityManager.getUserVisitDay().visitDay())){
             domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", 0);
         }
     }

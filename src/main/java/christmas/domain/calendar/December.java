@@ -64,9 +64,6 @@ public enum December {
     }
 
 
-    public int getDay() {
-        return day;
-    }
 
     public String getDayOfWeek() {
         return dayOfWeek;

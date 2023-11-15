@@ -19,7 +19,7 @@ public class WeekCategoryCheck {
     public void weekCategoryCheck(){
         List<String> orderMenu = domainEntityManager.getUserOrderInfo().getMenu();
         List<Integer> orderCounts = domainEntityManager.getUserOrderInfo().getCounts();
-        String weekCategory = December.getDayOfWeekByDay(domainEntityManager.getUserVisitDay().getVisitDay());
+        String weekCategory = December.getDayOfWeekByDay(domainEntityManager.getUserVisitDay().visitDay());
 
         if(weekCategory.equals("평일")){
             menuCategoryInWeekDayCheck(orderMenu, orderCounts);

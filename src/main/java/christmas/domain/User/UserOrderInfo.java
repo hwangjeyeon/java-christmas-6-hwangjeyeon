@@ -5,21 +5,30 @@ import java.util.List;
 
 public class UserOrderInfo {
 
-    private final List<String> menu;
-    private final List<Integer> counts;
+    private List<String> menu;
+    private List<Integer> counts;
 
     public UserOrderInfo(String info) {
         menu = new ArrayList<>();
         counts = new ArrayList<>();
 
         List<String> orderList = List.of(info.split(","));
+        setSplitMenuName(orderList);
+        setSplitMenuCounts(orderList);
+    }
 
-        for(String order : orderList){
-            List<String> orderParts = List.of(order.trim().split("-"));
-            menu.add(orderParts.get(0).trim());
-            counts.add(Integer.parseInt(orderParts.get(1).trim()));
-        }
+    private void setSplitMenuCounts(List<String> orderList) {
+        counts = orderList.stream()
+                .map(order -> order.split("-"))
+                .map(orderParts -> Integer.parseInt(orderParts[1].trim()))
+                .toList();
+    }
 
+    private void setSplitMenuName(List<String> orderList) {
+        menu = orderList.stream()
+                .map(order -> order.split("-"))
+                .map(orderParts -> orderParts[0].trim())
+                .toList();
     }
 
     public int calculateOrderCounts(){
