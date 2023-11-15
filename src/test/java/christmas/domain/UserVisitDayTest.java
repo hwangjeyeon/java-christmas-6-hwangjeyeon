@@ -15,7 +15,7 @@ class UserVisitDayTest {
             16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31})
     void userVisitDayFunctionTest(int expectedVisitDay){
         UserVisitDay userVisitDay = new UserVisitDay(expectedVisitDay);
-        Assertions.assertEquals(expectedVisitDay, userVisitDay.getVisitDay());
+        Assertions.assertEquals(expectedVisitDay, userVisitDay.visitDay());
     }
 
 

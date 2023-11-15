@@ -10,10 +10,6 @@ import java.util.stream.Stream;
 
 class UserOrderInfoTest {
 
-
-
-
-
     @ParameterizedTest
     @DisplayName("주문받은 메뉴명이 리스트에 잘 저장되는가")
     @MethodSource("expectedMenuListSource")

@@ -44,7 +44,7 @@ class DomainEntityManagerTest {
     @DisplayName("도메인 엔티티 매니저가 방문일을 잘 저장하는가")
     @Test
     void domainEntityManagerSaveVisitDayTest(){
-        Assertions.assertEquals(domainEntityManager.getUserVisitDay().getVisitDay()
+        Assertions.assertEquals(domainEntityManager.getUserVisitDay().visitDay()
                 , visitDay);
 
     }
@@ -116,7 +116,7 @@ class DomainEntityManagerTest {
     @Test
     void domainEntityManagerSaveDdayInfoTest1(){
         //given
-
+        businessService.orderInfoSaveUtil();
         //when
         businessService.dDayCheckUtil();
 
@@ -196,6 +196,7 @@ class DomainEntityManagerTest {
         userVisitDay = new UserVisitDay(visitDay);
         domainEntityManager = new DomainEntityManager(userVisitDay, userOrderInfo);
         businessService = new BusinessService(domainEntityManager);
+        businessService.orderInfoSaveUtil();
         //when
         businessService.starCheckUtil();
 
@@ -300,6 +301,21 @@ class DomainEntityManagerTest {
 
         //then
         Assertions.assertEquals(domainEntityManager.getEventBadge().getEventBadge(),"없음");
+    }
+
+    @DisplayName("도메인 엔티티 매니저가 만원 미만으로 주문할 때, 혜택 미적용을 잘 반영하는가?")
+    @Test
+    void domainEntityManagerNoneBenefits(){
+        //given
+        domainEntityManager.getOrderInfo().setBeforeOrderAmount(9000);
+
+        //when
+        businessService.orderInfoSaveUtil();
+        businessService.calculateBenefitsUtil();
+
+        //then
+        Assertions.assertEquals(domainEntityManager.getBenefitInfo().getTotalBenefitsAmounts(),0);
+
     }
 
 }
