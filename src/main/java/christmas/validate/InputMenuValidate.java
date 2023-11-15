@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class InputMenuValidate {
 
     private final String PREFIX = "[ERROR] ";
-    private final String SUFFIX = "다시 입력해주세요.\n";
+    private final String SUFFIX = "다시 입력해 주세요.\n";
 
     private final String menu;
     private List<String> menuItems;

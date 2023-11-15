@@ -40,10 +40,6 @@ public class WeekCategoryCheck {
         weekCategoryInNone();
     }
 
-
-
-
-
     private void weekCategoryInWeekDay(String weekCategory, List<String> orderMenu, List<Integer> orderCounts) {
         if(weekCategory.equals("평일")){
             menuCategoryInWeekDayCheck(orderMenu, orderCounts);

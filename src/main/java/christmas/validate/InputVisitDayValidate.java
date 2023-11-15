@@ -2,7 +2,7 @@ package christmas.validate;
 
 public class InputVisitDayValidate {
     private final String PREFIX = "[ERROR] ";
-    private final String SUFFIX = "다시 입력해주세요.\n";
+    private final String SUFFIX = "다시 입력해 주세요.\n";
     private final String day;
 
     public InputVisitDayValidate(String day) {
