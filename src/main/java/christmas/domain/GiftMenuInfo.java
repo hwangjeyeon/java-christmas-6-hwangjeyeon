@@ -4,6 +4,11 @@ import christmas.domain.menu.MenuInfo;
 
 public class GiftMenuInfo {
 
+    /**
+     * name: 증정 상품 명
+     * counts: 증정 상품 개수
+     * price: 증정 상품 가격
+     */
     private String name;
     private int counts;
     private int price;

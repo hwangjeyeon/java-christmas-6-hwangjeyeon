@@ -9,6 +9,10 @@ public class EventBadgeCheck {
         this.domainEntityManager = domainEntityManager;
     }
 
+
+    /**
+     * eventBadgeCheck(): 이벤트 배지 정보 확인
+     */
     public void eventBadgeCheck(){
 
         if(domainEntityManager.getBenefitInfo().getTotalBenefitsAmounts() >= 5000){

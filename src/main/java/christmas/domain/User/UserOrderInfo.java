@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserOrderInfo {
-
+    /**
+     * menu: 고객이 선택한 메뉴 명
+     * counts: 고객이 선택한 메뉴 개수
+     */
     private List<String> menu;
     private List<Integer> counts;
 

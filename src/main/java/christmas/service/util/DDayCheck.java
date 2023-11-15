@@ -9,6 +9,10 @@ public class DDayCheck {
         this.domainEntityManager = domainEntityManager;
     }
 
+
+    /**
+     * dDayCheck(): 디데이 정보 확인
+     */
     public void dDayCheck(){
         if(domainEntityManager.getUserVisitDay().visitDay() <= 25
             && domainEntityManager.getOrderInfo().getBeforeOrderAmount() >= 10000){

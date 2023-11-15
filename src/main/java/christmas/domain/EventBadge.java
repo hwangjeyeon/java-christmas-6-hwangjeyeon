@@ -1,7 +1,9 @@
 package christmas.domain;
 
 public class EventBadge {
-
+    /**
+     * eventBadge: 이벤트 배지
+     */
     private String eventBadge;
 
     public EventBadge() {

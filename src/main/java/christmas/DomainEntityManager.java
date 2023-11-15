@@ -12,7 +12,9 @@ import christmas.domain.menu.MenuInfo;
 import java.util.Calendar;
 import java.util.EnumMap;
 
-
+/**
+ * DomainEntityManager는 도메인 객체들을 관리하는 곳입니다.
+ */
 public class DomainEntityManager {
 
     private final UserOrderInfo userOrderInfo;

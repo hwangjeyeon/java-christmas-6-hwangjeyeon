@@ -24,7 +24,7 @@ public class BusinessService {
 
     public void orderInfoSaveUtil(){
         OrderInfoSave orderInfoSave = new OrderInfoSave(domainEntityManager);
-        orderInfoSave.calculateOrderAmount();
+        orderInfoSave.calculateBeforeOrderAmount();
     }
 
     public void giftCheckUtil(){

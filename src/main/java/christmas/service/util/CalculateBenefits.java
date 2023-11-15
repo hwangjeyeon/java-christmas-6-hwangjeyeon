@@ -12,6 +12,11 @@ public class CalculateBenefits {
         this.domainEntityManager = domainEntityManager;
     }
 
+
+    /**
+     * calculateBenefits(): 총 혜택 금액 계산
+     * calculateAfterDiscounts(): 할인 후, 총 결제 금액 계산
+     */
     public void calculateBenefits(){
         List<Integer> benefits = domainEntityManager.getBenefitInfo().getBenefitsAmounts();
         int benefitsAmount = benefits.stream()

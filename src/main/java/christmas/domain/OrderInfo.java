@@ -1,6 +1,10 @@
 package christmas.domain;
 
 public class OrderInfo {
+
+    /**
+     * beforeOrderAmount: 할인 전 총 주문 금액
+     */
     private int beforeOrderAmount;
 
     public int getBeforeOrderAmount() {

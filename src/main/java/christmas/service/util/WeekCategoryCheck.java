@@ -16,28 +16,44 @@ public class WeekCategoryCheck {
         this.domainEntityManager = domainEntityManager;
     }
 
+    /**
+     * weekCategoryCheck():
+     * - weekCategoryInWeekDay(): 평일인지 확인
+     *      - menuCategoryInWeekDayCheck():
+     *          - weekDayDiscounts (static): 평일 할인정보 계산
+     *          - weekDayDiscounts(): 평일 할인정보 저장
+     *          - noneDiscounts(): 할인 혜택 미적용
+     * - weekCategoryInWeekendDay(): 주말인지 확인
+     *      - menuCategoryInWeekendDayCheck():
+     *          - weekendDayDiscounts(static): 주말 할인정보 계산
+     *          - weekendDayDiscounts(): 주말 할인정보 저장
+     *          - noneDiscounts(): 할인 혜택 미적용
+     * - weekCategoryInNone(): 할인 혜택 미적용
+     */
     public void weekCategoryCheck(){
         List<String> orderMenu = domainEntityManager.getUserOrderInfo().getMenu();
         List<Integer> orderCounts = domainEntityManager.getUserOrderInfo().getCounts();
         String weekCategory = December.getDayOfWeekByDay(domainEntityManager.getUserVisitDay().visitDay());
 
+        weekCategoryInWeekDay(weekCategory, orderMenu, orderCounts);
+        weekCategoryInWeekendDay(weekCategory, orderMenu, orderCounts);
+        weekCategoryInNone();
+    }
+
+
+
+
+
+    private void weekCategoryInWeekDay(String weekCategory, List<String> orderMenu, List<Integer> orderCounts) {
         if(weekCategory.equals("평일")){
             menuCategoryInWeekDayCheck(orderMenu, orderCounts);
-        }
-
-        if(weekCategory.equals("주말")){
-            menuCategoryInWeekendDayCheck(orderMenu, orderCounts);
-        }
-
-        if(domainEntityManager.getOrderInfo().getBeforeOrderAmount() < 10000){
-            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", 0);
         }
     }
 
 
     public void menuCategoryInWeekDayCheck(List<String> orderMenu, List<Integer> orderCounts){
         int discounts = weekDayDiscounts(orderMenu, orderCounts);
-        noDiscounts(discounts);
+        noneDiscounts(discounts);
         weekDayDiscounts(discounts);
     }
 
@@ -59,10 +75,15 @@ public class WeekCategoryCheck {
         }
     }
 
+    private void weekCategoryInWeekendDay(String weekCategory, List<String> orderMenu, List<Integer> orderCounts) {
+        if(weekCategory.equals("주말")){
+            menuCategoryInWeekendDayCheck(orderMenu, orderCounts);
+        }
+    }
 
     public void menuCategoryInWeekendDayCheck(List<String> orderMenu, List<Integer> orderCounts){
         int discounts = weekendDayDiscounts(orderMenu, orderCounts);
-        noDiscounts(discounts);
+        noneDiscounts(discounts);
         weekendDayDiscounts(discounts);
     }
 
@@ -83,8 +104,14 @@ public class WeekCategoryCheck {
         }
     }
 
-    private void noDiscounts(int discounts) {
+    private void noneDiscounts(int discounts) {
         if(discounts == 0){
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", 0);
+        }
+    }
+
+    private void weekCategoryInNone() {
+        if(domainEntityManager.getOrderInfo().getBeforeOrderAmount() < 10000){
             domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", 0);
         }
     }

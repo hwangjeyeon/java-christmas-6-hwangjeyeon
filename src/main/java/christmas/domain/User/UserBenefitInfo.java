@@ -5,6 +5,12 @@ import java.util.List;
 
 public class UserBenefitInfo {
 
+    /**
+     * benefitsName: 혜택 명
+     * benefitsAmounts: 혜택 금액
+     * totalBenefitsAmounts: 총 혜택 금액
+     * afterDiscountAmounts: 혜택 적용 후, 총 결제 금액
+     */
     private final List<String> benefitsName;
     private final List<Integer> benefitsAmounts;
 

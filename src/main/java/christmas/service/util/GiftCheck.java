@@ -10,6 +10,12 @@ public class GiftCheck {
         this.domainEntityManager = domainEntityManager;
     }
 
+
+    /**
+     * giftCheck(): 증정 선물 제공 여부 판단
+     * setGiftMenuInfo(): 증정 선물 정보 설정
+     *
+     */
     public boolean giftCheck(){
         if(domainEntityManager.getOrderInfo().getBeforeOrderAmount() >= 120000){
             return true;

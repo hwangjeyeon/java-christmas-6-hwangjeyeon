@@ -13,7 +13,10 @@ public class OrderInfoSave {
         this.domainEntityManager = domainEntityManager;
     }
 
-    public void calculateOrderAmount(){
+    /**
+     * calculateBeforeOrderAmount(): 할인 전 주문 정보 계산 및 저장
+     */
+    public void calculateBeforeOrderAmount(){
         List<String> orderMenu = domainEntityManager.getUserOrderInfo().getMenu();
         List<Integer> orderCounts = domainEntityManager.getUserOrderInfo().getCounts();
 
