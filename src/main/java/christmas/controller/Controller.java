@@ -1,4 +1,4 @@
-package christmas;
+package christmas.controller;
 
 import christmas.domain.DomainEntityManager;
 import christmas.service.BusinessService;
