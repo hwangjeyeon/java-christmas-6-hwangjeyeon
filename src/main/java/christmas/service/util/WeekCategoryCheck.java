@@ -36,45 +36,57 @@ public class WeekCategoryCheck {
 
 
     public void menuCategoryInWeekDayCheck(List<String> orderMenu, List<Integer> orderCounts){
-        int discounts = IntStream.range(0, orderMenu.size())
-                    .filter(i -> {
-                        String menuName = orderMenu.get(i);
-                        Category category = MenuInfo.getCategoryByName(menuName);
-                        return category == Category.DESSERT; // 원하는 카테고리로 변경
-                    })
-                    .mapToObj(orderCounts::get)
-                    .mapToInt(Integer::intValue)
-                    .sum();
-        if(discounts == 0){
-            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", 0);
-        }
-
-        if(discounts != 0){
-            domainEntityManager.getBenefitInfo().addBenefitsListInfo("평일 할인", discounts*2023);
-        }
-
+        int discounts = weekDayDiscounts(orderMenu, orderCounts);
+        noDiscounts(discounts);
+        weekDayDiscounts(discounts);
     }
 
-
-    public void menuCategoryInWeekendDayCheck(List<String> orderMenu, List<Integer> orderCounts){
-        int discounts = IntStream.range(0, orderMenu.size()).filter(i -> {
+    private static int weekDayDiscounts(List<String> orderMenu, List<Integer> orderCounts) {
+        return IntStream.range(0, orderMenu.size())
+                .filter(i -> {
                     String menuName = orderMenu.get(i);
                     Category category = MenuInfo.getCategoryByName(menuName);
-                    return category == Category.MAIN; // 원하는 카테고리로 변경
+                    return category == Category.DESSERT;
                 })
                 .mapToObj(orderCounts::get)
                 .mapToInt(Integer::intValue)
                 .sum();
-        if(discounts == 0){
-            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", 0);
-        }
+    }
 
+    private void weekDayDiscounts(int discounts) {
         if(discounts != 0){
-            domainEntityManager.getBenefitInfo().addBenefitsListInfo("주말 할인", discounts*2023);
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("평일 할인", discounts * 2023);
         }
-
     }
 
 
+    public void menuCategoryInWeekendDayCheck(List<String> orderMenu, List<Integer> orderCounts){
+        int discounts = weekendDayDiscounts(orderMenu, orderCounts);
+        noDiscounts(discounts);
+        weekendDayDiscounts(discounts);
+    }
+
+    private static int weekendDayDiscounts(List<String> orderMenu, List<Integer> orderCounts) {
+        return IntStream.range(0, orderMenu.size()).filter(i -> {
+                    String menuName = orderMenu.get(i);
+                    Category category = MenuInfo.getCategoryByName(menuName);
+                    return category == Category.MAIN;
+                })
+                .mapToObj(orderCounts::get)
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+    private void weekendDayDiscounts(int discounts) {
+        if(discounts != 0){
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("주말 할인", discounts * 2023);
+        }
+    }
+
+    private void noDiscounts(int discounts) {
+        if(discounts == 0){
+            domainEntityManager.getBenefitInfo().addBenefitsListInfo("없음", 0);
+        }
+    }
 
 }

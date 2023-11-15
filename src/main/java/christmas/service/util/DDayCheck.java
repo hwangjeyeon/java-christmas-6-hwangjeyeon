@@ -3,7 +3,7 @@ package christmas.service.util;
 import christmas.DomainEntityManager;
 
 public class DDayCheck {
-    DomainEntityManager domainEntityManager;
+    private final DomainEntityManager domainEntityManager;
 
     public DDayCheck(DomainEntityManager domainEntityManager) {
         this.domainEntityManager = domainEntityManager;
