@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.domain.DomainEntityManager;
 import christmas.domain.Info.GiftMenuInfo;
 import christmas.domain.Info.OrderInfo;
 import christmas.domain.User.UserBenefitInfo;

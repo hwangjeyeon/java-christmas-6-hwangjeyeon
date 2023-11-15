@@ -1,6 +1,6 @@
 package christmas.service;
 
-import christmas.DomainEntityManager;
+import christmas.domain.DomainEntityManager;
 import christmas.service.util.*;
 
 public class BusinessService {

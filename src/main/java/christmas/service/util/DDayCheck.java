@@ -1,6 +1,6 @@
 package christmas.service.util;
 
-import christmas.DomainEntityManager;
+import christmas.domain.DomainEntityManager;
 
 public class DDayCheck {
     private final DomainEntityManager domainEntityManager;

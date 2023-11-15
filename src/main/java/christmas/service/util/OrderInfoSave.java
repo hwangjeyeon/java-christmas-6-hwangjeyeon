@@ -1,6 +1,6 @@
 package christmas.service.util;
 
-import christmas.DomainEntityManager;
+import christmas.domain.DomainEntityManager;
 import christmas.domain.menu.MenuInfo;
 import java.util.List;
 import java.util.stream.IntStream;

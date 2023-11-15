@@ -1,6 +1,6 @@
 package christmas.service;
 
-import christmas.DomainEntityManager;
+import christmas.domain.DomainEntityManager;
 
 import java.text.DecimalFormat;
 import java.util.stream.IntStream;

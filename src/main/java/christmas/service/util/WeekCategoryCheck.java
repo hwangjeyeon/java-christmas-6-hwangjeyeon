@@ -1,6 +1,6 @@
 package christmas.service.util;
 
-import christmas.DomainEntityManager;
+import christmas.domain.DomainEntityManager;
 import christmas.domain.calendar.December;
 import christmas.domain.menu.Category;
 import christmas.domain.menu.MenuInfo;

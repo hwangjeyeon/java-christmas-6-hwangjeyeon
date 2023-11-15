@@ -1,4 +1,4 @@
-package christmas;
+package christmas.domain;
 
 import christmas.domain.Info.EventBadgeInfo;
 import christmas.domain.Info.GiftMenuInfo;
