@@ -1,12 +1,12 @@
 package christmas.domain;
 
-public class EventBadge {
+public class EventBadgeInfo {
     /**
      * eventBadge: 이벤트 배지
      */
     private String eventBadge;
 
-    public EventBadge() {
+    public EventBadgeInfo() {
         this.eventBadge = "없음";
     }
 
