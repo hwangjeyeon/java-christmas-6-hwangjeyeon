@@ -39,18 +39,30 @@ public class InputMenuValidate {
     }
 
     public void splitSetup(){
-        menuItems = Arrays.asList(menu.split(","));
+        menuItemsSetup();
         splitValidate();
-        menuNameValidate = menuItems.stream().map(menuItem -> menuItem.split("-")[0])
-                .collect(Collectors.toList());
+        menuNameValidateSetup();
+        menuCountsValidateSetup();
+    }
+
+    private void menuItemsSetup() {
+        menuItems = Arrays.asList(menu.split(","));
+    }
+
+    private void menuCountsValidateSetup() {
         menuCountsValidate = menuItems.stream()
                 .map(menuItem -> Integer.parseInt(menuItem.split("-")[1]))
                 .collect(Collectors.toList());
     }
 
+    private void menuNameValidateSetup() {
+        menuNameValidate = menuItems.stream().map(menuItem -> menuItem.split("-")[0])
+                .collect(Collectors.toList());
+    }
+
 
     public void splitValidate(){
-        // menuItem이 String-int형이 아니면 예외
+        // menuItem이 다음 형식 "문자-숫자"이 아니면 예외 발생
         if (menuItems.stream().anyMatch(menuItem -> !menuItem.matches(".+-\\d+"))) {
             throw new IllegalArgumentException(PREFIX + "유효하지 않은 주문입니다. " + SUFFIX);
         }
