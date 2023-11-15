@@ -1,63 +1,84 @@
-### 도메인: 데이터 정보를 가지고 있는 모델
-- 사용자 입력 날짜 정보
-- 사용자 주문 메뉴, 개수
-- 주문 정보(전체 주문개수, 할인 전 총주문 금액)
-- 메뉴 정보(이름, 가격) -> enum
-- 증정메뉴 정보 (이름, 개수) -> enum
-- 12월 날짜별 정보(일자, 주말/평일여부, 별표 존재 여부) -> enum
+# JAVA-CHRISTMAS-6
 
-- 고객의 혜택 정보(증정메뉴, 혜택 내역, 총혜택 금액, 할인 후 예상 결제 금액, 12월 이벤트 배지)
+## 클래스 리스트: 
 
-- 혜택 내역 (이름 금액) -> enum
-- 이벤트 배지 정보(이름, 금액) -> enum
+### domain
+- DomainEntityManager
+#### calender
+- December
+#### Info
+- EventBadgeInfo
+- GiftMenuInfo
+- OrderInfo
+#### menu
+- Category
+- MenuInfo
+#### User
+- UserBenefitInfo
+- UserOrderInfo
+- UserVisitDay
 
+### service
+- BasicService: 현재 미사용
+- BusinessService
+- InputService
+- OutputService
+#### util
+- CalculateBenefits
+- DDayCheck
+- EventBadgeCheck
+- GiftCheck
+- GiftSave
+- OrderInfoSave
+- StarCheck
+- WeekCategoryCheck
+- 
+### validate
+- InputMenuValidate
+- InputVisitDayValidate
 
-### 뷰: 출력문 출력
+### view
 - InputView
 - OutputView
 
-### 컨트롤러
-- InputView 출력
-- 서비스 로직 실행
-- OutputView 출력
-
-### 도메인 매니저 추가
-- 서비스로 발생하는 저장 및 수정을 하나의 도메인 객체 내에서 처리할 수 있도록 하는 역할
-
-### 서비스
-- InputService 로직: (InputVisitDay() -> InputMenu())
-  - InputVisitDay(입력 -> 검증 -> 저장)
-  - InputMenu(입력 -> 검증(beforeDiscountCheck, 공통예외) -> 저장)
-  
-- DiscountDayCheck(입력 날짜 가져와서 다음을 비교 -> 디데이 할인 체크, 평일/주말 할인 여부 체크, 특별할인 여부 체크, 각 항목을 체크해서 그 금액을
-  사용자의 입력 금액에서 뺀만큼을 할인 후 예상 결제금액에, 그리고 혜택 금액만큼을 총혜택 금액에 저장한다, 또한 체크할 때마다 그 혜택 내역을 저장한다).
-- benefitslListCheck(증정 메뉴를 줄 수 있느지 여부를 판단한다. 줄 수 있으면 개수를 해당 도메인에 저장한다. Map으로 저장, 각 혜택 내역 이름을 키로, 그리고 할인 금액을 값으로 한다
-  -> 위 DiscountDayCheck에서 저장된 금액들을 가져오고 enum에서 가격을 가져와서 곱해서 저장한다. )
-- benefitsMoneyCheck (혜택 내역에 있는 모든 금액을 더해서 저장한다)
-- afterDiscountCheck (할인 후 예상 결제금액을 계산해서 저장한다 이때 할인 전 총 주문 금액에서 총 혜택 금액을 빼서 저장한다)
-- badgeCheck (혜택 금액을 확인해서 금액에 맞는 이벤트 배지 정보를 가져와서 그 금액을 저장한다.)
-- resultPrint (출력 형식에 맞춰서 출력하며 정보는 위 서비스를 통해 저장된 값들을 가져와서 출력한다)
-
-### 유틸
-- OrderInfoSave 로직:
-  - UserOrderInfo 클래스의 주문 개수 리스트를 가져와서 전체 개수를 파악한 후, 해당 값을 orderCounts에 저장
-  - UserOrderInfo 클래스의 주문 메뉴 리스트를 가져와서, 메뉴 정보 클래스를 통해 각 가격 메뉴를 가져온다음 그 합한 가격을 beforeOrderAmount에 저장
+## test
+- ApplicationTest
+- DomainEntityManagerTest
+#### domain
+- UserOrderInfoTest
+- UserVisitDayTest
 
 
-### 검증: 서비스 로직에서 검증 클래스로 입력 데이터 확인
-- 입력 값에 대한 검증만을 진행한다. 이외의 다른 도메인은 테스트코드를 통해 로직 적용 후의 값을 확인한다
-- 날짜 검증 내역
-  -> 방문할 날짜가 숫자인가
-  -> 방문할 날짜가 1~31 사이의 숫자인가
-  -> 방문할 날짜가 정수로 입력되었는가
-- 주문 메뉴 검증 내역
-  -> 메뉴판에 있는 메뉴를 골랐는가
-  -> 메뉴의 개수가 1개이상, 20개 이하인가
-  -> 메뉴 형식에 맞게 주문했는가? (시저샐러드-1)형식
-  -> 중복 메뉴를 입력했는가
-  -> 개수를 정수로 입력했는가
-  -> 음료만 주문하였는가
 
-
-### 고려사항
+## 진행방식
 - TDD(테스트 주도 개발)로 진행할 계획 -> 하나의 기능 만든 후, 단위 테스트로 검증하는 방식으로 개발할 것.
+
+## 입력 예외 사항
+- 입력한 날짜가 정수형 숫자인가?
+- 입력한 날짜가 1~31범위안에 있는가
+- 입력한 메뉴가 ","로 분리된 후, 다음 입력 형식을 따르는가? "문자-숫자"
+- 입력한 메뉴명이 메뉴판에 있는 메뉴인가?
+- 입력한 메뉴명에 중복이 있는가?
+- 입력한 메뉴의 개수가 최소 ~ 최대 범위 안에 있는가
+- 입력한 메뉴의 카테고리가 음료 이외의 것이 있는가
+
+## 비즈니스 예외 요구사항 
+- 1만원 이하 주문 혜택 미적용 
+
+## 프로젝트 핵심 로직
+- DomainEntityManager에서 모든 도메인 객체를 관리한다.
+- DomainEntityManager는 InputService를 통해, 입력받은 값을 주입받는다
+- BusinessService, OutputService는 DomainEntityManager를 주입받아 같은 객체의 도메인에 접근해서 활용한다
+- Input은 InputView -> InputService 방향으로 주입받는다
+- Output은 OutputService -> OutputView 방향으로 주입받는다
+
+## 고려사항: 
+- 도메인 접근은 DomainEntityManager에만 의존한다
+- View는 단순 출력을 위함이며, InputService와 OutputService에서 출력을 위한 모든 로직을 처리한다
+- BusinessService는 핵심 비즈니스를 관리한다. 각 세부 비즈니스 로직은 Util 패키지로 관리한다
+- 중복 변수명은 상수처리한다
+- MVC 패턴을 참고하여, 각 파트가 각자의 기능 구현에 집중하도록 최대한 분리한다
+
+## 제출 이후 추가하고 싶은 기능:
+- BasicService: 기본 메뉴 정보와 주의사항을 알려주는 서비스 -> 출력문 형식을 맞추기 위해 현재 주석처리
+- 악의적인 반복 입력 사용자 차단: 일정 입력횟수 이상 입력될 경우, 사용자 ip를 받아와 차단
