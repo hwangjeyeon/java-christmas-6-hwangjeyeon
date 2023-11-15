@@ -69,7 +69,7 @@ public class InputMenuValidate {
     }
 
     private void menuNameCheckValidate(){
-        // 메뉴명이 메뉴판에 있는 메뉴인가?
+        // 입력한 메뉴명이 메뉴판에 있는 메뉴인가?
         if (menuNameValidate.stream()
                 .noneMatch(menuName -> Arrays.stream(MenuInfo.values())
                         .anyMatch(menuInfo -> menuInfo.getName().equals(menuName)))) {
@@ -86,6 +86,7 @@ public class InputMenuValidate {
 
 
     private void menuCountsRangeValidate() {
+        // 입력한 메뉴의 개수가 최소 ~ 최대 범위 안에 있는가
         if (menuCountsValidate.stream().anyMatch(count -> count < 1 || count > 20)) {
             throw new IllegalArgumentException(PREFIX + "유효하지 않은 주문입니다. " + SUFFIX);
         }
