@@ -1,8 +1,8 @@
 package christmas;
 
-import christmas.domain.EventBadgeInfo;
-import christmas.domain.GiftMenuInfo;
-import christmas.domain.OrderInfo;
+import christmas.domain.Info.EventBadgeInfo;
+import christmas.domain.Info.GiftMenuInfo;
+import christmas.domain.Info.OrderInfo;
 import christmas.domain.User.UserBenefitInfo;
 import christmas.domain.User.UserOrderInfo;
 import christmas.domain.User.UserVisitDay;

@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.Info;
 
 import christmas.domain.menu.MenuInfo;
 
